@@ -1,0 +1,48 @@
+{
+  "name": "test1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "prettier":"prettier --single-quote --tab-width 2 --trailing-comma all --write src/**/*.{js,json,scss}", 
+    
+    "start": "nodemon --inspect src/index.js",
+    "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "lint-staged": {
+    "*": "your-cmd",
+    "src/**/*.{js,json,scss}": "prettier --single-quote --tab-width 2 --trailing-comma all --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test && npm run foo"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leythien2002/Nodejs_Test.git"
+  },
+  "keywords": [
+    "nodejs",
+    "testnodejs"
+  ],
+  "author": "thien",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leythien2002/Nodejs_Test/issues"
+  },
+  "homepage": "https://github.com/leythien2002/Nodejs_Test#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6"
+  },
+  "devDependencies": {
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
+    "morgan": "^1.10.0",
+    "node-sass": "^7.0.3",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.1"
+  }
+}
