@@ -6,6 +6,10 @@ const app = express(); //express la framework
 const port = 3000;
 
 const route = require('./routes');
+const db=require('./config/db');
+
+//Connect db
+db.connect();
 
 //http logger ( nó là mấy cái thông tin hiện ra khi chạy lên cmd)
 app.use(morgan('combined'));
@@ -17,7 +21,7 @@ app.engine(
   }),
 );
 app.set('view engine', 'handlebars'); //su dung view engine
-app.set('views', path.join(__dirname + '/resources/views'));
+app.set('views', path.join(__dirname + '/resources/views')); //__dirname + 'resources','views' co the ghi nhu nay
 app.use(express.static(path.join(__dirname, 'public'))); // tao cai duong dan public de lay file css
 //https://stackoverflow.com/questions/13395742/can-not-get-css-file
 
@@ -25,5 +29,5 @@ app.use(express.static(path.join(__dirname, 'public'))); // tao cai duong dan pu
 route(app);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`App listening on port ${port}`);
 });

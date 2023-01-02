@@ -5,8 +5,8 @@ const siteController = require('../app/controller/SiteController'); // day la go
 //Khi khoi tao thi moi viet hoa. đã khởi tạo rồi mà gọi lại thì nên viết thường chữ đầu --> nó tượng trưng cho dữ liệu
 
 // newsController.index
-router.use('/search', siteController.search);
+router.get('/search', siteController.search);
 
-router.use('/', siteController.index); // vì xét từ trên xg nên để cái trang chính của news sau cùng để có thể chạy cai khac
+router.get('/', siteController.index); // vì xét từ trên xg nên để cái trang chính của news sau cùng để có thể chạy cai khac
 
 module.exports = router;

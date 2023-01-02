@@ -2,4 +2,7 @@ h1 {
   color: purple; }
 
 h2 {
-  color: green; }
+  color: red; }
+
+.card-course-item {
+  margin-top: 16px; }
