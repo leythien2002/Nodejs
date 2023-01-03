@@ -14,4 +14,4 @@ const Course = new Schema({
   videoId: { type: String },
   create: { type: Date, default: Date.now },
 });
-module.exports = mongoose.model('Course', Course);
+        module.exports = mongoose.model('Course', Course);
