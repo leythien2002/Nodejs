@@ -7,7 +7,8 @@
     "prettier": "lint-staged",
     "start": "nodemon --inspect src/index.js",
     "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "src/**/*.{js,json,scss}": "prettier --single-quote --tab-width 2 --trailing-comma all --write"
@@ -38,7 +39,7 @@
     "mongoose-slug-generator": "^1.0.4"
   },
   "devDependencies": {
-    "husky": "^8.0.2",
+    "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
     "morgan": "^1.10.0",
     "node-sass": "^7.0.3",
