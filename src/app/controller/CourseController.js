@@ -12,11 +12,11 @@ class CourseController {
       .catch(next);
     // res.send(req.params.slug)
   }
-  create(req, res) {
+      create(req, res) {
     res.render('courses/create');
   }
   //post/courses/store
-  store(req, res) {
+        store(req, res) {
     const data = req.body;
     data.image =
       'https://1stwebdesigner.com/wp-content/uploads/2019/07/css-background-effects-thumb.jpg';

@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //const ObjectId = Schema.ObjectId;
-const slug = require('mongoose-slug-generator');
+      const slug = require('mongoose-slug-generator');
 mongoose.plugin(slug);
-const Course = new Schema({
+      const Course = new Schema({
   //cho này ghi Course vì khi nó đọc vào model hay tạo model
   // no sẽ chuyển thành chữ thường hết và tự thêm s
   name: { type: String },
