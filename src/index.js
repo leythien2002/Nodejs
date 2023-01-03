@@ -3,10 +3,12 @@ const path = require('path');
 const morgan = require('morgan');
 const { engine } = require('express-handlebars');
 const app = express(); //express la framework
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 const port = 3000;
 
 const route = require('./routes');
-const db=require('./config/db');
+const db = require('./config/db');
 
 //Connect db
 db.connect();

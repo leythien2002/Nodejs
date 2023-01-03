@@ -6,8 +6,6 @@ function route(app) {
   app.use('/courses', coursesRouter);
   app.use('/', siteRouter);
 
-
-
   app.post('/search', (req, res) => {
     res.send('');
   });
