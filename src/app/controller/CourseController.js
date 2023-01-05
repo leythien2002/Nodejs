@@ -12,17 +12,33 @@ class CourseController {
       .catch(next);
     // res.send(req.params.slug)
   }
-      create(req, res) {
+  create(req, res) {
     res.render('courses/create');
   }
+
   //post/courses/store
-        store(req, res) {
+  store(req, res) {
     const data = req.body;
     data.image =
       'https://1stwebdesigner.com/wp-content/uploads/2019/07/css-background-effects-thumb.jpg';
     Course.create(data)
       .then(() => res.redirect('/'))
       .catch((error) => {});
+  }
+  edit(req, res, next) {
+    Course.findById(req.params.id)
+      .then((course) =>
+        res.render('courses/edit', { course: singleMongooseToObject(course) }),
+      )
+      .catch(next);
+  }
+  //get, post ,put, patch, delete,option
+  //put/ patch la dung cho chinh sua ( cai nay theo Restful)
+  //put/course/:id
+  update(req, res, next) {
+    Course.updateOne({ _id: req.params.id }, req.body)
+      .then(() => res.redirect('/me/stored/courses'))
+      .catch(next);
   }
 }
 module.exports = new CourseController();

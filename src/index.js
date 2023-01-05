@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
+const methodOverride = require('method-override');
 const { engine } = require('express-handlebars');
 const app = express(); //express la framework
 app.use(express.json());
@@ -12,7 +13,7 @@ const db = require('./config/db');
 
 //Connect db
 db.connect();
-
+app.use(methodOverride('_method'));
 //http logger ( nó là mấy cái thông tin hiện ra khi chạy lên cmd)
 app.use(morgan('combined'));
 //template engine
@@ -20,6 +21,9 @@ app.engine(
   'handlebars',
   engine({
     extname: '.handlebars', // doi ten duoi file cua cai engine( engine la 1 cai ten tu dat)
+    helpers: {
+      sum: (a, b) => a + b,
+    },
   }),
 );
 app.set('view engine', 'handlebars'); //su dung view engine

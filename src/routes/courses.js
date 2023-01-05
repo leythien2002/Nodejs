@@ -6,7 +6,9 @@ const newsController = require('../app/controller/CourseController'); // day la 
 // newsController.index
 
 router.get('/create', newsController.create); // :slug la cai param động chạy sau get/news/...
-router.post('/store', newsController.store); // :slug la cai param động chạy sau get/news/...
+router.post('/store', newsController.store);
+router.get('/edit/:id', newsController.edit);
+router.put('/:id', newsController.update);
 router.get('/:slug', newsController.show); // :slug la cai param động chạy sau get/news/...
 
 module.exports = router;
