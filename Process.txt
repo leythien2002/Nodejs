@@ -1,1 +1,1 @@
-6/1 -->Completed Soft Delete
+6/1 -->Completed Soft Delete (Get error at Restore button==> why it can't restore if it don't have event.preventDefault() ??)
