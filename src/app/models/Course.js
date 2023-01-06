@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const mongooseDelete = require('mongoose-delete');
 //const ObjectId = Schema.ObjectId;
 const slug = require('mongoose-slug-generator');
-mongoose.plugin(slug);
+
 const Course = new Schema({
   //cho này ghi Course vì khi nó đọc vào model hay tạo model
   // no sẽ chuyển thành chữ thường hết và tự thêm s
@@ -13,5 +13,12 @@ const Course = new Schema({
   image: { type: String },
   videoId: { type: String },
   create: { type: Date, default: Date.now },
+});
+// ADD plugin
+mongoose.plugin(slug);
+Course.plugin(mongooseDelete);
+Course.plugin(mongooseDelete, {
+  deletedAt: true,
+  overrideMethods: 'all',
 });
 module.exports = mongoose.model('Course', Course);

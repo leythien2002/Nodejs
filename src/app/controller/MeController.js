@@ -14,5 +14,15 @@ class MeController {
       )
       .catch(next);
   }
+  //Get/me/bin/courses
+  binCourses(req, res, next) {
+    Course.findDeleted({})
+      .then((courses) =>
+        res.render('me/bin-course', {
+          courses: multipleMongooseToObject(courses),
+        }),
+      )
+      .catch(next);
+  }
 }
 module.exports = new MeController();

@@ -9,6 +9,8 @@ router.get('/create', newsController.create); // :slug la cai param động ch�
 router.post('/store', newsController.store);
 router.get('/edit/:id', newsController.edit);
 router.delete('/delete/:id', newsController.delete);
+router.delete('/force-delete/:id', newsController.forceDelete);
+router.patch('/restore/:id', newsController.restore);
 router.put('/:id', newsController.update);
 router.get('/:slug', newsController.show); // :slug la cai param động chạy sau get/news/...
 
