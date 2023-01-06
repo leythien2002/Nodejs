@@ -8,6 +8,7 @@ const newsController = require('../app/controller/CourseController'); // day la 
 router.get('/create', newsController.create); // :slug la cai param động chạy sau get/news/...
 router.post('/store', newsController.store);
 router.get('/edit/:id', newsController.edit);
+router.delete('/delete/:id', newsController.delete);
 router.put('/:id', newsController.update);
 router.get('/:slug', newsController.show); // :slug la cai param động chạy sau get/news/...
 
