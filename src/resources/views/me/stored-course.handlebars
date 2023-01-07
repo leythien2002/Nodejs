@@ -1,12 +1,28 @@
-<div class="mt-4">
+<form name="container-form" class="mt-4" method="post" action="/courses/action-form">
   <div>
     <h3>My courses </h3>
-    <a href="/me/bin/courses">Bin</a>
+    {{!-- {{#if deletedCount}} --}}
+    <a href="/me/bin/courses">Bin({{deletedCount}})</a>
+    {{!-- {{/if}} --}}
+  </div>
+  <div class="mt-4 d-flex align-items-center">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="checkboxAll">
+      <label class="form-check-label" for="checkboxAll">
+       Check All
+      </label>
+    </div>
+    <select class="form-control form-control-sm checkbox-all-options" name="actions" required>
+      <option value="">Open this select menu</option>
+      <option value="delete">Delete</option>
+    </select>
+    <button class="btn btn-primary btn-sm disabled" id="checked-action">Apply</button>
   </div>
   
   <table class="table mt-4">
       <thead>
           <tr>
+              <th scope="col">Checkbox</th>
               <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">Description</th>
@@ -18,6 +34,11 @@
       <tbody>
           {{#each courses}}
           <tr>
+              <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="coursesIds" value="{{this._id}}" >                 
+                </div>
+              </td>
               <th scope="row">{{sum @index 1}}</th>
               <td>{{this.name}}</td>
               <td>{{this.description}}</td>
@@ -39,7 +60,7 @@
       </tbody>
       
   </table>
-</div>
+</form>
 
 {{!-- confirm --}}
 <div id="delete-course" class="modal" tabindex="-1" role="dialog">
@@ -69,7 +90,11 @@
     //khi no tải xong hết rồi thì nó mới chạy function
     document.addEventListener('DOMContentLoaded',function(){
         var courseId;
+        var containerForm=document.forms['container-form'];
         var deleteForm=document.forms['delete-form'];
+        var checkboxAll=$('#checkboxAll');
+        var courseItemChecked=$('input[name="coursesIds[]"]');
+        var checkedAction=$('#checked-action')
         $('#delete-course').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var id = button.data('id') // Extract info from data-* attributes
@@ -81,6 +106,39 @@
             deleteForm.action='/courses/delete/'+courseId+'?_method=DELETE';
             deleteForm.submit();
         }
+        //checkboxall clicked
+        checkboxAll.change(function(){
+          var isCheckedAll=($(this).prop('checked'));
+          courseItemChecked.prop('checked',isCheckedAll);
+          renderCheckAllButton();
+        });
+        //coursesItemCheckClick changed
+        courseItemChecked.change(function(){
+          var isCheckedAll=courseItemChecked.length==$('input[name="coursesIds[]"]:checked').length;
+          checkboxAll.prop('checked',isCheckedAll);
+          renderCheckAllButton();
+        })
+        //check submiteAction is checked
+       //kiem tra su kien submit form
+        checkedAction.on('submit',function(event){
+          var isSubmittable=!$(this).hasClass('disabled');
+          if(!isSubmittable){
+            event.preventDefault();
+            
+          }
+        })
+
+        //enable Execuse btn action
+        function renderCheckAllButton(){
+          var isChecked=$('input[name="coursesIds[]"]:checked').length;
+          if(isChecked>0){
+            checkedAction.removeClass('disabled');
+          }
+          else{
+            checkedAction.addClass('disabled');
+          }
+        }
+        
     })
 
 </script>

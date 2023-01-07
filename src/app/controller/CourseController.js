@@ -41,6 +41,7 @@ class CourseController {
       .catch(next);
   }
   //delete/course/delete/:id
+  //cai nay la soft delete la cho no vao thung rac
   delete(req, res, next) {
     Course.delete({ _id: req.params.id })
       .then(() => res.redirect('back'))
@@ -52,10 +53,23 @@ class CourseController {
       .then(() => res.redirect('back'))
       .catch(next);
   }
+  //delete/courses/force-delete/id
   forceDelete(req, res, next) {
     Course.deleteOne({ _id: req.params.id })
       .then(() => res.redirect('back'))
       .catch(next);
+  }
+  //delete/courses/action-form
+  actionForm(req, res, next) {
+    switch (req.body.actions) {
+      case 'delete':
+        Course.delete({ _id: { $in: req.body.coursesIds } })
+          .then(() => res.redirect('back'))
+          .catch(next);
+        break;
+      default:
+        res.json({ message: 'Action is invalid' });
+    }
   }
 }
 module.exports = new CourseController();
