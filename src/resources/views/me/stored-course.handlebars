@@ -1,6 +1,7 @@
 <form name="container-form" class="mt-4" method="post" action="/courses/action-form">
   <div>
     <h3>My courses </h3>
+    {{sort.enabled}}
     {{!-- {{#if deletedCount}} --}}
     <a href="/me/bin/courses">Bin({{deletedCount}})</a>
     {{!-- {{/if}} --}}
@@ -24,8 +25,15 @@
           <tr>
               <th scope="col">Checkbox</th>
               <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Description</th>
+              <th scope="col">Name
+                {{{sortable 'name' sort}}}
+                {{!-- Ở chỗ này sẽ vi phạm bảo mật, hacker có thể truyền dữ liệu vào 
+                thong qua url --}}
+              </th>
+              <th scope="col">Description
+                {{{sortable 'description' sort}}}
+              </th>
+
               <th scope="col">videoId</th>
               <th scope="col"></th>
           </tr>
@@ -90,7 +98,8 @@
     //khi no tải xong hết rồi thì nó mới chạy function
     document.addEventListener('DOMContentLoaded',function(){
         var courseId;
-        var containerForm=document.forms['container-form'];
+        //var containerForm=document.forms['container-form'];
+        var containerForm=$('form[name="container-form"]')
         var deleteForm=document.forms['delete-form'];
         var checkboxAll=$('#checkboxAll');
         var courseItemChecked=$('input[name="coursesIds[]"]');
@@ -120,8 +129,9 @@
         })
         //check submiteAction is checked
        //kiem tra su kien submit form
-        checkedAction.on('submit',function(event){
-          var isSubmittable=!$(this).hasClass('disabled');
+       //hoac co the thay cai event nay bằng attribute disable trong button
+        containerForm.on('submit',function(event){
+          var isSubmittable=!checkedAction.hasClass('disabled');
           if(!isSubmittable){
             event.preventDefault();
             

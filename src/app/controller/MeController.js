@@ -6,8 +6,16 @@ const Course = require('../models/Course');
 class MeController {
   //Get/me/courses
   show(req, res, next) {
+    let courseQuery = Course.find({});
+    if (req.query.hasOwnProperty('sort')) {
+      if (req.query.type != 'default') {
+        courseQuery = courseQuery.sort({
+          [req.query.column]: req.query.type,
+        });
+      }
+    }
     //promise all se thực hiện cả 2 phương thức phía dưới đồng thời
-    Promise.all([Course.find({}), Course.countDocumentsDeleted()])
+    Promise.all([courseQuery, Course.countDocumentsDeleted()])
       .then(([courses, deletedCount]) =>
         res.render('me/stored-course', {
           deletedCount,
