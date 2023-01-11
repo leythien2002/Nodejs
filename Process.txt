@@ -1,2 +1,2 @@
 6/1 -->Completed Soft Delete (Get error at Restore button==> why it can't restore if it don't have event.preventDefault() ??)
-Autoincreement _id field (video 38f8) giup đánh số index dựa vào mongoose
+8/1-->Autoincreement _id field (video 38f8) giup đánh số index dựa vào mongoose
